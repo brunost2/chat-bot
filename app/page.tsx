@@ -1,18 +1,18 @@
 "use client";
-
-import { useChat } from "ai/react";
-import { useEffect, useRef } from "react";
-import Textarea from "react-textarea-autosize";
+import React, { useState } from 'react';
+import { useChat } from 'ai/react';
+import { useEffect, useRef } from 'react';
+import Textarea from 'react-textarea-autosize';
 
 export default function Home() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "/api",
+    api: '/api',
   });
 
   const messageEndRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
-    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -21,11 +21,15 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-neutral-800">
+      {/* Mensagem de identificação do criador */}
+      <p className="text-white text-center py-2">
+        Este bot foi desenvolvido por Bruno Santos.
+      </p>
       {messages.length !== 0 ? (
         <div className="pb-32 pt-5 space-y-5 w-[75%] mx-auto relative">
           {messages.map((message) => (
             <div key={message.id} className="w-full">
-              {message.role === "user" ? (
+              {message.role === 'user' ? (
                 <div className="flex  gap-x-2">
                   <div className="bg-gray-500 h-12 w-12 rounded-lg">
                     <svg
@@ -49,19 +53,7 @@ export default function Home() {
               ) : (
                 <div className="flex gap-x-2">
                   <div className="bg-blue-500 h-12 w-12 rounded-lg">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-full h-full text-white p-1"
-                    >
-                      <path d="M16.5 7.5h-9v9h9v-9z" />
-                      <path
-                        fillRule="evenodd"
-                        d="M8.25 2.25A.75.75 0 019 3v.75h2.25V3a.75.75 0 011.5 0v.75H15V3a.75.75 0 011.5 0v.75h.75a3 3 0 013 3v.75H21A.75.75 0 0121 9h-.75v2.25H21a.75.75 0 010 1.5h-.75V15H21a.75.75 0 010 1.5h-.75v.75a3 3 0 01-3 3h-.75V21a.75.75 0 01-1.5 0v-.75h-2.25V21a.75.75 0 01-1.5 0v-.75H9V21a.75.75 0 01-1.5 0v-.75h-.75a3 3 0 01-3-3v-.75H3A.75.75 0 013 15h.75v-2.25H3a.75.75 0 010-1.5h.75V9H3a.75.75 0 010-1.5h.75v-.75a3 3 0 013-3h.75V3a.75.75 0 01.75-.75zM6 6.75A.75.75 0 016.75 6h10.5a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75H6.75a.75.75 0 01-.75-.75V6.75z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <img src="/images/Bruno.png" alt="" />
                   </div>
 
                   <p className="rounded-lg p-3 w-full border-blue-500 border-2 text-sm">
@@ -75,7 +67,7 @@ export default function Home() {
       ) : (
         <div className="w-full flex justify-center pt-32">
           <h1 className="font-bold text-3xl">
-           Por favor, digite a mensagem no campo abaixo ⬇️
+            Por favor, digite a mensagem no campo abaixo ⬇️
           </h1>
         </div>
       )}
