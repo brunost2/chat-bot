@@ -19,14 +19,17 @@ export default function Home() {
     scrollToBottom();
   }, [messages]);
 
+  const isMobile = window.innerWidth <= 768;
+
   return (
-    <div className="min-h-screen bg-neutral-800">
+    <div className="min-h-screen bg-neutral-800 relative">
       {/* Mensagem de identificação do criador */}
       <p className="text-white text-center py-2">
         Este bot foi desenvolvido por Bruno Santos.
       </p>
       {messages.length !== 0 ? (
-        <div className="pb-32 pt-5 space-y-5 w-[75%] mx-auto relative">
+        <div className={`${isMobile ? 'w-[80%] ' : 'w-[75%]'} pb-32 pt-5 space-y-5 mx-auto`}>
+
           {messages.map((message) => (
             <div key={message.id} className="w-full">
               {message.role === 'user' ? (
@@ -65,7 +68,7 @@ export default function Home() {
           ))}
         </div>
       ) : (
-        <div className="w-full flex justify-center pt-32">
+        <div className={`w-full flex justify-center ${isMobile ? 'pt-16 w-[95%] text-center ' : 'pt-32 '}`}>
           <h1 className="font-bold text-3xl">
             Por favor, digite a mensagem no campo abaixo ⬇️
           </h1>
@@ -76,9 +79,9 @@ export default function Home() {
 
       <form
         onSubmit={handleSubmit}
-        className="p-5 fixed bottom-0 left-0 w-[75%] mx-auto right-0 bg-neutral-800"
+        className={`p-5 ${isMobile ? 'fixed bottom-0 pl-10 w-[95%] bg-neutral-800' : 'fixed bottom-0 left-0 w-[75%] mx-auto right-0 bg-neutral-800'}`}
       >
-        <div className="relative flex items-center">
+        <div className={`relative flex items-center ${isMobile ? 'mt-[-6rem]' : ''}`}>
           <Textarea
             tabIndex={0}
             required
@@ -92,7 +95,7 @@ export default function Home() {
           />
           <button
             type="submit"
-            className="absolute bg-blue-500 p-2 rounded-lg right-0 mr-5"
+            className={`absolute bg-blue-500 p-2 rounded-lg right-0 mr-5 ${isMobile ? '' : ''}`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
